@@ -1,0 +1,4 @@
+id,account_id,category_id,amount,transaction_date,description,is_recurring,payment_method
+6a406c64-98bb-4cde-9c91-d7d334c2e152,33afaec1-71a2-4d9b-83c4-e379d9580b89,f69adaeb-e315-4ebd-aaea-b0eadb5915b7,3000.0,2025-05-05T21:23:25.485668,Monthly salary,False,direct deposit
+343b342d-a08a-48f4-b524-8c13dca6cdab,35bde86e-6e6c-476e-83dd-cfd1db9eb455,334522b8-7016-4fe9-9362-342666613bd7,-150.0,2025-05-05T21:23:25.487014,Weekly groceries,False,debit card
+5aa3e9e7-d4cd-4bfc-8b35-f6d9481ba729,35bde86e-6e6c-476e-83dd-cfd1db9eb455,334522b8-7016-4fe9-9362-342666613bd7,-75.5,2025-05-05T21:23:25.488276,Farmers market,False,cash

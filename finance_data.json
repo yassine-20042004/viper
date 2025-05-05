@@ -1,0 +1,31 @@
+{
+    "users": {
+        "947036af-64a8-49ca-9cae-55f3020d9a5a": {
+            "id": "947036af-64a8-49ca-9cae-55f3020d9a5a",
+            "username": "zaidharboul",
+            "email": "zaidharboul@gmail.com",
+            "password_hash": "zaid2004",
+            "is_active": true,
+            "created_at": "2025-05-05T21:52:34.817389",
+            "last_login": "2025-05-05T21:53:12.354592"
+        }
+    },
+    "profiles": {
+        "33c55049-abeb-457e-a296-c77cc574ad84": {
+            "id": "33c55049-abeb-457e-a296-c77cc574ad84",
+            "user_id": "947036af-64a8-49ca-9cae-55f3020d9a5a",
+            "first_name": "",
+            "last_name": "",
+            "preference_theme": "light",
+            "notification_settings": "all"
+        }
+    },
+    "accounts": {},
+    "categories": {},
+    "transactions": {},
+    "budgets": {},
+    "goals": {},
+    "reports": {},
+    "notifications": {},
+    "recommendations": {}
+}
