@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker v1.0</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input, select, textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 4px;
+        }
+        .empty-message {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Finance Tracker v1.0</h1>
+        
+        <!-- Formulaire d'entrée des dépenses -->
+        <form id="expense-form">
+            <div>
+                <label for="amount">Montant (DH):</label>
+                <input type="number" id="amount" step="0.01" min="0" required>
+            </div>
+            
+            <div>
+                <label for="category">Catégorie:</label>
+                <select id="category" required>
+                    <option value="">Sélectionner une catégorie</option>
+                    <option value="Alimentation">Alimentation</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Logement">Logement</option>
+                    <option value="Loisirs">Loisirs</option>
+                    <option value="Santé">Santé</option>
+                    <option value="Éducation">Éducation</option>
+                    <option value="Vêtements">Vêtements</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" rows="3" required></textarea>
+            </div>
+            
+            <button type="submit">Ajouter la dépense</button>
+        </form>
+        
+        <!-- Affichage des dépenses -->
+        <h2>Historique des dépenses</h2>
+        <div id="expenses-table">
+            <div class="empty-message">Aucune dépense enregistrée</div>
+        </div>
+        
+        <!-- Résumé des dépenses -->
+        <div class="summary">
+            <h3>Résumé</h3>
+            <p>Total des dépenses: <strong id="total-amount">0.00 DH</strong></p>
+            <p>Nombre de dépenses: <strong id="expense-count">0</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Gestionnaire d'événement pour la soumission du formulaire
+        document.getElementById('expense-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Récupération des valeurs entrées
+            const amount = document.getElementById('amount').value;
+            const category = document.getElementById('category').value;
+            const description = document.getElementById('description').value;
+            
+            // Préparation des données pour l'envoi au serveur
+            const data = {
+                amount: amount,
+                category: category,
+                description: description
+            };
+            
+            // Envoi des données au serveur
+            fetch('/api/add_expense', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Mise à jour du résumé
+                    document.getElementById('total-amount').textContent = data.total.toFixed(2) + ' DH';
+                    document.getElementById('expense-count').textContent = data.count;
+                    
+                    // Rafraîchir la liste des dépenses
+                    loadExpenses();
+                    
+                    // Réinitialisation du formulaire
+                    document.getElementById('expense-form').reset();
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de l\'ajout de la dépense.');
+            });
+        });
+        
+        // Fonction pour charger toutes les dépenses
+        function loadExpenses() {
+            fetch('/api/expenses')
+            .then(response => response.json())
+            .then(data => {
+                const expensesTable = document.getElementById('expenses-table');
+                
+                if (data.expenses.length === 0) {
+                    expensesTable.innerHTML = '<div class="empty-message">Aucune dépense enregistrée</div>';
+                    return;
+                }
+                
+                // Création du tableau HTML
+                let tableHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Montant (DH)</th>
+                                <th>Catégorie</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                // Ajout des lignes au tableau
+                data.expenses.forEach(expense => {
+                    tableHTML += `
+                        <tr>
+                            <td>${expense.id}</td>
+                            <td>${expense.amount.toFixed(2)}</td>
+                            <td>${expense.category}</td>
+                            <td>${expense.description}</td>
+                        </tr>
+                    `;
+                });
+                
+                tableHTML += `
+                        </tbody>
+                    </table>
+                `;
+                
+                // Mise à jour du DOM
+                expensesTable.innerHTML = tableHTML;
+                
+                // Mise à jour du résumé
+                document.getElementById('total-amount').textContent = data.total.toFixed(2) + ' DH';
+                document.getElementById('expense-count').textContent = data.count;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                document.getElementById('expenses-table').innerHTML = 
+                    '<div class="empty-message">Erreur lors du chargement des dépenses</div>';
+            });
+        }
+        
+        // Charger les dépenses au chargement de la page
+        document.addEventListener('DOMContentLoaded', loadExpenses);
+    </script>
+</body>
+</html>
