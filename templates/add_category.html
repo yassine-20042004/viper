@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter une catégorie - Personal Finance Manager{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-plus-circle me-2"></i>Ajouter une catégorie
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('add_category') }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nom de la catégorie</label>
+                            <input type="text" class="form-control" id="name" name="name" 
+                                   required placeholder="Ex: Alimentation">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Type de catégorie</label>
+                            <select class="form-select" id="type" name="type" required>
+                                <option value="">Sélectionnez un type</option>
+                                <option value="expense">Dépense</option>
+                                <option value="income">Revenu</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="icon" class="form-label">Icône</label>
+                            <div class="input-group">
+                                <select class="form-select" id="icon" name="icon">
+                                    <option value="🍽️">🍽️ Alimentation</option>
+                                    <option value="🚗">🚗 Transport</option>
+                                    <option value="🏠">🏠 Logement</option>
+                                    <option value="💊">💊 Santé</option>
+                                    <option value="🎮">🎮 Loisirs</option>
+                                    <option value="📚">📚 Éducation</option>
+                                    <option value="👕">👕 Shopping</option>
+                                    <option value="💰">💰 Salaire</option>
+                                    <option value="💼">💼 Business</option>
+                                    <option value="🎁">🎁 Cadeaux</option>
+                                    <option value="💵">💵 Autres</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="color" class="form-label">Couleur</label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" 
+                                       id="color" name="color" value="#FF6B6B">
+                                <span class="input-group-text">Choisir une couleur</span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Créer la catégorie
+                            </button>
+                            <a href="{{ url_for('categories') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

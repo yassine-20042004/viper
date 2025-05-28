@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Mes comptes - Personal Finance Manager{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">
+            <i class="fas fa-university text-primary me-2"></i>Mes comptes
+        </h1>
+        <a href="{{ url_for('add_account') }}" class="btn btn-primary">
+            <i class="fas fa-plus-circle me-2"></i>Nouveau compte
+        </a>
+    </div>
+
+    <div class="row">
+        {% if accounts %}
+            {% for account in accounts %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">
+                                {% if account.type == 'checking' %}
+                                    <i class="fas fa-wallet text-primary"></i>
+                                {% elif account.type == 'savings' %}
+                                    <i class="fas fa-piggy-bank text-success"></i>
+                                {% elif account.type == 'credit' %}
+                                    <i class="fas fa-credit-card text-danger"></i>
+                                {% elif account.type == 'cash' %}
+                                    <i class="fas fa-money-bill text-warning"></i>
+                                {% elif account.type == 'investment' %}
+                                    <i class="fas fa-chart-line text-info"></i>
+                                {% endif %}
+                                {{ account.name }}
+                            </h5>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <small class="text-muted">Type de compte</small>
+                            <p class="mb-0">
+                                {% if account.type == 'checking' %}
+                                    Compte courant
+                                {% elif account.type == 'savings' %}
+                                    Compte épargne
+                                {% elif account.type == 'credit' %}
+                                    Carte de crédit
+                                {% elif account.type == 'cash' %}
+                                    Espèces
+                                {% elif account.type == 'investment' %}
+                                    Compte d'investissement
+                                {% endif %}
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <small class="text-muted">Solde actuel</small>
+                            <h4 class="{% if account.current_balance < 0 %}text-danger{% else %}text-success{% endif %}">
+                                {{ account.current_balance }} {{ account.currency }}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('transactions') }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-exchange-alt me-1"></i>Transactions
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-cog me-1"></i>Paramètres
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-university fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Aucun compte pour le moment</h5>
+                    <p class="text-muted mb-3">Commencez par ajouter votre premier compte bancaire</p>
+                    <a href="{{ url_for('add_account') }}" class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-2"></i>Ajouter un compte
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

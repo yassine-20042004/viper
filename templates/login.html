@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Connexion - Personal Finance Manager{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-wallet fa-3x text-primary mb-3"></i>
+                        <h2 class="h4 text-gray-900">Connexion</h2>
+                        <p class="text-muted">Accédez à votre compte</p>
+                    </div>
+
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-user me-1"></i>Nom d'utilisateur ou Email
+                            </label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="username" 
+                                   name="username" 
+                                   required 
+                                   placeholder="Votre nom d'utilisateur ou email">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock me-1"></i>Mot de passe
+                            </label>
+                            <input type="password" 
+                                   class="form-control" 
+                                   id="password" 
+                                   name="password" 
+                                   required 
+                                   placeholder="Votre mot de passe">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                        </button>
+                    </form>
+
+                    <div class="text-center">
+                        <p class="mb-0">Pas encore de compte ? 
+                            <a href="{{ url_for('register') }}" class="text-primary text-decoration-none">
+                                Créer un compte
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comptes de test (à supprimer en production) -->
+            <div class="card mt-3 border-info">
+                <div class="card-body">
+                    <h6 class="card-title text-info">
+                        <i class="fas fa-info-circle me-1"></i>Comptes de test
+                    </h6>
+                    <small class="text-muted">
+                        Si aucun compte n'existe, créez-en un avec le bouton "Créer un compte"
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

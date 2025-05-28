@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Personal Finance Manager - Gérez vos finances facilement{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="row align-items-center min-vh-100 py-5">
+        <div class="col-lg-6">
+            <div class="mb-5">
+                <h1 class="display-4 fw-bold mb-4">
+                    Gérez vos finances en toute simplicité
+                </h1>
+                <p class="lead text-muted mb-4">
+                    Suivez vos revenus, contrôlez vos dépenses et atteignez vos objectifs financiers 
+                    avec notre gestionnaire de finances personnelles.
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus me-2"></i>Commencer gratuitement
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="text-center">
+                <i class="fas fa-chart-line display-1 text-primary mb-4"></i>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body text-center">
+                                <i class="fas fa-wallet text-success fa-2x mb-2"></i>
+                                <h6>Comptes</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body text-center">
+                                <i class="fas fa-exchange-alt text-info fa-2x mb-2"></i>
+                                <h6>Transactions</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body text-center">
+                                <i class="fas fa-piggy-bank text-warning fa-2x mb-2"></i>
+                                <h6>Budgets</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fonctionnalités -->
+    <div class="row py-5">
+        <div class="col-12 text-center mb-5">
+            <h2 class="display-5 fw-bold">Fonctionnalités principales</h2>
+            <p class="lead text-muted">Tout ce dont vous avez besoin pour gérer vos finances</p>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-university fa-3x text-primary mb-3"></i>
+                    <h5>Gestion des comptes</h5>
+                    <p class="text-muted">
+                        Créez et gérez plusieurs comptes bancaires, cartes de crédit et comptes d'épargne.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-tags fa-3x text-success mb-3"></i>
+                    <h5>Catégorisation</h5>
+                    <p class="text-muted">
+                        Organisez vos transactions par catégories personnalisables pour un meilleur suivi.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-chart-pie fa-3x text-warning mb-3"></i>
+                    <h5>Budgets intelligents</h5>
+                    <p class="text-muted">
+                        Définissez des budgets et suivez vos dépenses pour respecter vos objectifs financiers.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-history fa-3x text-info mb-3"></i>
+                    <h5>Historique détaillé</h5>
+                    <p class="text-muted">
+                        Consultez l'historique complet de toutes vos transactions avec des outils de recherche.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-shield-alt fa-3x text-danger mb-3"></i>
+                    <h5>Sécurité</h5>
+                    <p class="text-muted">
+                        Vos données sont sécurisées avec un chiffrement avancé et des connexions protégées.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-mobile-alt fa-3x text-purple mb-3"></i>
+                    <h5>Interface simple</h5>
+                    <p class="text-muted">
+                        Interface intuitive et responsive, accessible sur tous vos appareils.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row py-5 bg-primary text-white">
+        <div class="col-12 text-center">
+            <h2 class="display-5 fw-bold">Prêt à commencer ?</h2>
+            <p class="lead mb-4">Créez votre compte gratuitement et commencez à gérer vos finances dès aujourd'hui.</p>
+            <a href="{{ url_for('register') }}" class="btn btn-light btn-lg">
+                <i class="fas fa-user-plus me-2"></i>S'inscrire maintenant
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

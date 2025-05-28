@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter un compte - Personal Finance Manager{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-plus-circle me-2"></i>Ajouter un compte
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('add_account') }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nom du compte</label>
+                            <input type="text" class="form-control" id="name" name="name" 
+                                   required placeholder="Ex: Compte courant">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Type de compte</label>
+                            <select class="form-select" id="type" name="type" required>
+                                <option value="">Sélectionnez un type</option>
+                                <option value="checking">Compte courant</option>
+                                <option value="savings">Compte épargne</option>
+                                <option value="credit">Carte de crédit</option>
+                                <option value="cash">Espèces</option>
+                                <option value="investment">Compte d'investissement</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="balance" class="form-label">Solde initial</label>
+                            <div class="input-group">
+                                <span class="input-group-text">€</span>
+                                <input type="number" class="form-control" id="balance" name="balance" 
+                                       step="0.01" required placeholder="0.00">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="currency" class="form-label">Devise</label>
+                            <select class="form-select" id="currency" name="currency">
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="USD">USD - Dollar américain</option>
+                                <option value="GBP">GBP - Livre sterling</option>
+                                <option value="CHF">CHF - Franc suisse</option>
+                                <option value="CAD">CAD - Dollar canadien</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Créer le compte
+                            </button>
+                            <a href="{{ url_for('accounts') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
